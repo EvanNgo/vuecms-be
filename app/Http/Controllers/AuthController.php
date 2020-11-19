@@ -103,7 +103,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => Auth::factory()->getTTL() * 60,
-            'user' => Auth::user()
+            'user' => User::with(['roles:id,name,slug','roles.permissions:id,name,slug'])->find(Auth::id())
         ]);
     }
 }
