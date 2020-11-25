@@ -18,7 +18,7 @@ class CreateProductAttrItemsTable extends Migration
             $table->unsignedBigInteger('product_attr_id');
             $table->string('name');
             $table->string('slug');
-            $table->string('can_be_deleted')->default(true);
+            $table->boolean('can_be_deleted')->default(true);
 
             $table->foreign('product_attr_id')->references('id')->on('product_attrs')->onDelete('cascade');
         });

@@ -19,17 +19,24 @@ class ProductController extends Controller
     }
 
     public function add(Request $request) {
-        $request->request->add(['product_id' => Str::random(32)]);
-        $validatedData = $request->validate([
-            'product_id' => 'required|unique:products|max:32',
-            'name' => 'required',
-            'cost' => 'required',
-            'quatity' => 'required',
-            'brand' => 'nullable|string|max:30',
-            'discription' => 'nullable|string|max:5000',
-            'use' => 'nullable|string|max:5000'
-        ]);
-        return response()->json(Product::create($validatedData));
+        $data = json_decode(urldecode($request->data));
+        return response()->json($data);
+        // $request->request->add(['product_id' => Str::random(32)]);
+        // $validatedData = $request->validate([
+        //     'product_id' => 'required|unique:products|max:32',
+        //     'name' => 'required',
+        //     'cost' => 'required',
+        //     'quatity' => 'required',
+        //     'brand' => 'nullable|string|max:30',
+        //     'discription' => 'nullable|string|max:5000',
+        //     'use' => 'nullable|string|max:5000'
+        // ]);
+        // $mProduct = Product::create($validatedData);
+        // if (count($request->items) === 0) {
+        //     return response()->json($mProduct);
+        // } else {
+
+        // }
     }
 
     public function delete(Request $request)
