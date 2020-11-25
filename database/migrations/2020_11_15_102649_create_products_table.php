@@ -15,14 +15,17 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_id');
+            $table->string('slug');
             $table->string('name');
             $table->string('brand');
             $table->integer('cost');
             $table->integer('quatity');
             $table->text('discription');
             $table->text('use');
-            $table->boolean('delete_flag')->default(false);;
+            $table->integer('status')->default(0);
+            $table->boolean('edit_flag')->default(true);
+            $table->boolean('delete_flag')->default(false);
+            $table->boolean('public_flag')->default(false);
             $table->timestamps();
         });
     }

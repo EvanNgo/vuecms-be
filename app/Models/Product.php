@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'product_id',
+        'slug',
         'name',
         'brand',
         'cost',
@@ -17,4 +17,13 @@ class Product extends Model
         'discription',
         'use'
     ];
+
+    public function attrs() {
+        return $this->hasMany(ProductAttr::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(ProductItem::class);
+    }
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     public function index() {
-        return response()->json(Product::all());
+        return response()->json(Product::with(['items', 'attrs.items'])->get());
     }
 
     public function get(Request $request) {
