@@ -7,11 +7,12 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
-    Route::post('login', 'AuthController@login');
-    Route::post('register', 'AuthController@register');
-    Route::post('logout', 'AuthController@logout')->middleware('jwt');
-    Route::put('refresh', 'AuthController@refresh')->middleware('jwt');
-    Route::get('user-profile', 'AuthController@userProfile')->middleware('jwt');
+    $authController = 'AuthController@';
+    Route::post('login', $authController . 'login');
+    Route::post('register', $authController . 'register');
+    Route::post('logout', $authController . 'logout')->middleware('jwt');
+    Route::put('refresh', $authController . 'refresh')->middleware('jwt');
+    Route::get('user-profile', $authController . 'userProfile')->middleware('jwt');
 });
 
 Route::group([
@@ -45,4 +46,17 @@ Route::group([
     Route::put('delete', $productController . 'delete')->middleware(['jwt', 'permission.check:delete_product']);
     Route::put('update', $productController . 'update')->middleware(['jwt', 'permission.check:editor_product']);
     Route::put('force-delete', $productController . 'forceDelete')->middleware(['jwt', 'permission.check:force_delete_product']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'bill'
+], function ($router) {
+    $billController = 'BillController@';
+    Route::get('/', $billController . 'index');
+    Route::get('get', $billController . 'get');
+    Route::post('add', $billController . 'add')->middleware(['jwt', 'permission.check:editor_product']);
+    Route::put('delete', $billController . 'delete')->middleware(['jwt', 'permission.check:delete_product']);
+    Route::put('update', $billController . 'update')->middleware(['jwt', 'permission.check:editor_product']);
+    Route::put('force-delete', $billController . 'forceDelete')->middleware(['jwt', 'permission.check:force_delete_product']);
 });

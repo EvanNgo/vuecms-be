@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->string('name');
             $table->string('brand');
-            $table->integer('cost');
-            $table->integer('quatity');
+            $table->integer('cost')->default(0);
+            $table->integer('quatity')->default(0);
             $table->text('discription');
             $table->text('use');
             $table->integer('status')->default(0);
